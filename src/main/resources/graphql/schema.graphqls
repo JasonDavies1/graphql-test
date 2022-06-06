@@ -1,0 +1,21 @@
+type Player {
+    id: ID!
+    username: String!
+    level: Int
+    inventory: [Item]!
+}
+
+type Item {
+    id: ID!
+    name: String!
+    effect: String!
+}
+
+type Query {
+    allPlayers: [Player]!
+    allPlayerItems(userId: ID!): [Item]!
+}
+
+type Mutation {
+    addNewPlayer(username: String!) : Player!
+}
