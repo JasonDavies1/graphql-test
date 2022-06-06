@@ -1,0 +1,41 @@
+{
+  "data": {
+    "allPlayers": [
+      {
+        "id": "1",
+        "username": "whiterose",
+        "level": 42,
+        "inventory": []
+      },
+      {
+        "id": "2",
+        "username": "hunter2",
+        "level": 13,
+        "inventory": [
+          {
+            "id": "1",
+            "name": "Red Potion of Healing",
+            "effect": "Restore 50HP"
+          },
+          {
+            "id": "3",
+            "name": "Green Potion of Magic",
+            "effect": "Restore 50MGP"
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "username": "coolguy42",
+        "level": 50,
+        "inventory": [
+          {
+            "id": "2",
+            "name": "Blue Potion of Mana",
+            "effect": "Restore 20MP"
+          }
+        ]
+      }
+    ]
+  }
+}

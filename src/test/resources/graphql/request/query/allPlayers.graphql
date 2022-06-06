@@ -1,0 +1,12 @@
+query {
+    allPlayers {
+        id
+        username
+        level
+        inventory {
+            id
+            name
+            effect
+        }
+    }
+}

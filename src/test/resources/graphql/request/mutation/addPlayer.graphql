@@ -1,0 +1,12 @@
+mutation {
+    addNewPlayer(username: "john-doe") {
+        id
+        username
+        level
+        inventory {
+            id
+            name
+            effect
+        }
+    }
+}

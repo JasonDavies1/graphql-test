@@ -53,16 +53,16 @@ class PlayerRepositoryImplTest {
 
         assertThat(result.getId())
                 .isEqualTo("1");
-         assertThat(result.getInventory())
-                 .singleElement()
-                 .satisfies(item -> {
-                     assertThat(item.getName())
-                             .isEqualTo("Red Potion");
-                 });
+        assertThat(result.getInventory())
+                .singleElement()
+                .satisfies(item -> {
+                    assertThat(item.getName())
+                            .isEqualTo("Red Potion");
+                });
     }
 
     @Test
-    public void givenPlayerIsSearchedForById_WhenPlayerExistsWithId_ThenPlayerIsReturned(){
+    public void givenPlayerIsSearchedForById_WhenPlayerExistsWithId_ThenPlayerIsReturned() {
         final Player result = playerRepository.findPlayerById("1");
 
         assertThat(result.getUsername())
@@ -70,7 +70,7 @@ class PlayerRepositoryImplTest {
     }
 
     @Test
-    public void givenPlayerIsSearchedForById_WhenPlayerDoesNotExistWithId_ThenExceptionIsThrown(){
+    public void givenPlayerIsSearchedForById_WhenPlayerDoesNotExistWithId_ThenExceptionIsThrown() {
         assertThatCode(() -> playerRepository.findPlayerById("non-existent"))
                 .isInstanceOf(PlayerNotFoundException.class)
                 .hasMessage("Player with id non-existent not found");
