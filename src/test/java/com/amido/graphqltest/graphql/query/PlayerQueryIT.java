@@ -18,7 +18,7 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = GraphqlTestApplication.class
 )
-class PlayerQueryIntegrationTest extends GraphQlIntegrationTestBase {
+class PlayerQueryIT extends GraphQlIntegrationTestBase {
 
     @Test
     @Disabled("Shared context between PlayerMutationIT and this test causes this test to fail unless run in isolation")
