@@ -6,10 +6,12 @@ import com.amido.graphqltest.service.ItemService;
 import com.amido.graphqltest.service.PlayerService;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 
+@Component
 @RequiredArgsConstructor
 public class PlayerQuery implements GraphQLQueryResolver {
 

@@ -4,7 +4,9 @@ import com.amido.graphqltest.domain.Player;
 import com.amido.graphqltest.service.PlayerService;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @RequiredArgsConstructor
 public class PlayerMutation implements GraphQLMutationResolver {
 
