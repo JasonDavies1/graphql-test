@@ -2,7 +2,7 @@ package com.amido.graphqltest.config;
 
 import com.amido.graphqltest.domain.Item;
 import com.amido.graphqltest.domain.Player;
-import com.amido.graphqltest.repository.PlayerRepositoryImpl;
+import com.amido.graphqltest.service.PlayerServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 public class PlayerRepositoryConfig {
 
     @Bean
-    public PlayerRepositoryImpl playerRepository() {
-        return new PlayerRepositoryImpl(
+    public PlayerServiceImpl playerRepository() {
+        return new PlayerServiceImpl(
                 Stream.of(
                         player(1, "whiterose", 42),
                         player(2, "hunter2", 13, redPotion(), greenPotion()),

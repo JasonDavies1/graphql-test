@@ -1,15 +1,15 @@
-package com.amido.graphqltest.repository;
+package com.amido.graphqltest.service;
 
 import com.amido.graphqltest.domain.Player;
 import com.amido.graphqltest.exception.PlayerNotFoundException;
 
 import java.util.List;
 
-public class PlayerRepositoryImpl implements PlayerRepository {
+public class PlayerServiceImpl implements PlayerService {
 
     private final List<Player> players;
 
-    public PlayerRepositoryImpl(final List<Player> players) {
+    public PlayerServiceImpl(final List<Player> players) {
         this.players = players;
     }
 

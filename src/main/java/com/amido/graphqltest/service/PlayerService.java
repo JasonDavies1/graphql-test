@@ -1,10 +1,10 @@
-package com.amido.graphqltest.repository;
+package com.amido.graphqltest.service;
 
 import com.amido.graphqltest.domain.Player;
 
 import java.util.List;
 
-public interface PlayerRepository {
+public interface PlayerService {
 
     List<Player> findAllPlayers();
 

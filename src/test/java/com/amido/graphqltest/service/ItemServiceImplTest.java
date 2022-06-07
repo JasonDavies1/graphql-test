@@ -1,4 +1,4 @@
-package com.amido.graphqltest.repository;
+package com.amido.graphqltest.service;
 
 import com.amido.graphqltest.domain.Item;
 import com.amido.graphqltest.domain.Player;
@@ -11,10 +11,10 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-class ItemRepositoryImplTest {
+class ItemServiceImplTest {
 
-    private final PlayerRepository playerRepository = mock(PlayerRepository.class);
-    private final ItemRepository itemRepository = new ItemRepositoryImpl(playerRepository);
+    private final PlayerService playerService = mock(PlayerService.class);
+    private final ItemService itemService = new ItemServiceImpl(playerService);
 
     @Test
     public void givenAPlayerIsFoundById_WhenRetrievingItemsForPlayer_ThenListOfItemsAreReturned() {
@@ -25,10 +25,10 @@ class ItemRepositoryImplTest {
         player.setId(playerID);
         player.setInventory(Collections.singletonList(item));
 
-        given(playerRepository.findPlayerById(playerID))
+        given(playerService.findPlayerById(playerID))
                 .willReturn(player);
 
-        final List<Item> result = itemRepository.getPlayerInventoryItems(playerID);
+        final List<Item> result = itemService.getPlayerInventoryItems(playerID);
 
         assertThat(result)
                 .singleElement()
@@ -42,10 +42,10 @@ class ItemRepositoryImplTest {
         final Integer playerId = 1;
         player.setId(playerId);
 
-        given(playerRepository.findPlayerById(playerId))
+        given(playerService.findPlayerById(playerId))
                 .willReturn(player);
 
-        final List<Item> result = itemRepository.getPlayerInventoryItems(playerId);
+        final List<Item> result = itemService.getPlayerInventoryItems(playerId);
 
         assertThat(result)
                 .isEmpty();

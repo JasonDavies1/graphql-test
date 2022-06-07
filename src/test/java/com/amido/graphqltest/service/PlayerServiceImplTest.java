@@ -1,4 +1,4 @@
-package com.amido.graphqltest.repository;
+package com.amido.graphqltest.service;
 
 import com.amido.graphqltest.domain.Item;
 import com.amido.graphqltest.domain.Player;
@@ -14,13 +14,13 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-class PlayerRepositoryImplTest {
+class PlayerServiceImplTest {
 
-    private PlayerRepositoryImpl playerRepository;
+    private PlayerServiceImpl playerRepository;
 
     @BeforeEach
     public void setUp() {
-        playerRepository = new PlayerRepositoryImpl(
+        playerRepository = new PlayerServiceImpl(
                 Stream.of(testPlayer()).collect(Collectors.toList())
         );
     }
