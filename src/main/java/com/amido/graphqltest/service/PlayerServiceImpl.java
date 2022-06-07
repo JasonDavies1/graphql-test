@@ -2,42 +2,39 @@ package com.amido.graphqltest.service;
 
 import com.amido.graphqltest.domain.Player;
 import com.amido.graphqltest.exception.PlayerNotFoundException;
+import com.amido.graphqltest.repository.PlayerRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class PlayerServiceImpl implements PlayerService {
 
-    private final List<Player> players;
-
-    public PlayerServiceImpl(final List<Player> players) {
-        this.players = players;
-    }
+    private final PlayerRepository playerRepository;
 
     @Override
     public List<Player> findAllPlayers() {
-        return players;
+        return playerRepository.findAll();
     }
 
     @Override
     public Player addNewPlayer(final String username) {
-        return players.stream()
-                .filter(p -> p.getUsername().equalsIgnoreCase(username))
-                .findFirst()
+        return playerRepository.findByUsername(username)
                 .orElseGet(() -> {
                     final Player newPlayer = new Player();
                     newPlayer.setLevel(1);
                     newPlayer.setUsername(username);
-                    players.add(newPlayer);
-                    return newPlayer;
+                    return playerRepository.save(newPlayer);
                 });
 
     }
 
     @Override
     public Player findPlayerById(final Integer id) {
-        return players.stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst()
+        return playerRepository.findById(id)
                 .orElseThrow(() -> new PlayerNotFoundException("Player with id " + id + " not found"));
     }
 }

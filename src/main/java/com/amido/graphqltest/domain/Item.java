@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="items")
+@Table(name = "items")
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,6 +15,8 @@ public class Item {
     private String name;
     private String effect;
 
-    @ManyToMany(mappedBy = "inventory")
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            mappedBy = "inventory")
     private List<Player> playersWithItem;
 }

@@ -3,9 +3,12 @@ package com.amido.graphqltest.service;
 import com.amido.graphqltest.domain.Item;
 import com.amido.graphqltest.domain.Player;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 

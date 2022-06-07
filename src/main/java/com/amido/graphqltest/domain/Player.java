@@ -1,6 +1,7 @@
 package com.amido.graphqltest.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Player {
     private String username;
     private int level;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "player_items",
             joinColumns = @JoinColumn(name = "player_id"),
