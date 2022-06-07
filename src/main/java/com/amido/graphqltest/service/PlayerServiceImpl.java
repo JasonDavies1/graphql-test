@@ -5,7 +5,6 @@ import com.amido.graphqltest.exception.PlayerNotFoundException;
 import com.amido.graphqltest.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,7 +28,6 @@ public class PlayerServiceImpl implements PlayerService {
                     newPlayer.setUsername(username);
                     return playerRepository.save(newPlayer);
                 });
-
     }
 
     @Override

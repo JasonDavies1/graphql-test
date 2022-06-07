@@ -1,7 +1,6 @@
 package com.amido.graphqltest.domain;
 
 import lombok.Data;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.util.ArrayList;

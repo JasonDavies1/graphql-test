@@ -19,7 +19,7 @@ import static org.mockito.Mockito.mock;
 class PlayerServiceImplTest {
 
     private final PlayerRepository playerRepository = mock(PlayerRepository.class);
-    private PlayerServiceImpl playerService = new PlayerServiceImpl(playerRepository);
+    private final PlayerServiceImpl playerService = new PlayerServiceImpl(playerRepository);
 
     @Test
     public void givenRepositoryContainsOnePlayer_WhenSearchingForAllPlayers_ThenASingletonListIsReturned() {

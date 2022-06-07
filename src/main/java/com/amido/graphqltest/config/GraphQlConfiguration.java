@@ -5,9 +5,7 @@ import com.amido.graphqltest.graphql.mutation.PlayerMutation;
 import com.amido.graphqltest.graphql.query.PlayerQuery;
 import com.amido.graphqltest.graphql.resolver.ItemResolver;
 import com.amido.graphqltest.graphql.resolver.PlayerResolver;
-import com.amido.graphqltest.repository.ItemRepository;
 import com.amido.graphqltest.service.ItemService;
-import com.amido.graphqltest.service.ItemServiceImpl;
 import com.amido.graphqltest.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +17,7 @@ public class GraphQlConfiguration {
 
     private final PlayerService playerService;
     private final ItemService itemService;
+
     @Bean
     public PlayerMutation playerMutation() {
         return new PlayerMutation(playerService);
