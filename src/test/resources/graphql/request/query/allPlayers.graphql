@@ -1,6 +1,5 @@
 query {
     allPlayers {
-        id
         username
         level
         inventory {

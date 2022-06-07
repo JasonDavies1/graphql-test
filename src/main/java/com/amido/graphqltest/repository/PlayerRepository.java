@@ -10,6 +10,6 @@ public interface PlayerRepository {
 
     Player addNewPlayer(String username);
 
-    Player findPlayerById(String id);
+    Player findPlayerById(Integer id);
 
 }

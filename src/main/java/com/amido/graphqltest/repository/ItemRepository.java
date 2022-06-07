@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ItemRepository {
 
-    List<Item> getPlayerInventoryItems(String userId);
+    List<Item> getPlayerInventoryItems(Integer userId);
 
 }

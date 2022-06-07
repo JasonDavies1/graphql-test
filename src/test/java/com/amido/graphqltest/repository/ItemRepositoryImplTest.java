@@ -18,7 +18,7 @@ class ItemRepositoryImplTest {
 
     @Test
     public void givenAPlayerIsFoundById_WhenRetrievingItemsForPlayer_ThenListOfItemsAreReturned() {
-        final String playerID = "1";
+        final Integer playerID = 1;
         final Player player = new Player();
         final Item item = new Item();
         item.setName("Red Potion");
@@ -39,7 +39,7 @@ class ItemRepositoryImplTest {
     @Test
     public void givenPlayerIsFoundById_WhenRetrievingItemsForPlayer_ThenAnEmptyListIsReturned() {
         final Player player = new Player();
-        final String playerId = "1";
+        final Integer playerId = 1;
         player.setId(playerId);
 
         given(playerRepository.findPlayerById(playerId))

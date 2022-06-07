@@ -17,15 +17,15 @@ public class PlayerRepositoryConfig {
     public PlayerRepositoryImpl playerRepository() {
         return new PlayerRepositoryImpl(
                 Stream.of(
-                        player("1", "whiterose", 42),
-                        player("2", "hunter2", 13, redPotion(), greenPotion()),
-                        player("3", "coolguy42", 50, bluePotion())
+                        player(1, "whiterose", 42),
+                        player(2, "hunter2", 13, redPotion(), greenPotion()),
+                        player(3, "coolguy42", 50, bluePotion())
                 ).collect(Collectors.toList())
         );
     }
 
     private Player player(
-            final String id,
+            final Integer id,
             final String username,
             final int level,
             final Item... items){
@@ -38,19 +38,19 @@ public class PlayerRepositoryConfig {
     }
 
     private Item redPotion(){
-        return item("1", "Red Potion of Healing", "Restore 50HP");
+        return item(1, "Red Potion of Healing", "Restore 50HP");
     }
 
     private Item bluePotion(){
-        return item("2", "Blue Potion of Mana", "Restore 20MP");
+        return item(2, "Blue Potion of Mana", "Restore 20MP");
     }
 
     private Item greenPotion(){
-        return item("3", "Green Potion of Magic", "Restore 50MGP");
+        return item(3, "Green Potion of Magic", "Restore 50MGP");
     }
 
     private Item item(
-            final String id,
+            final Integer id,
             final String name,
             final String effect) {
         final Item item = new Item();

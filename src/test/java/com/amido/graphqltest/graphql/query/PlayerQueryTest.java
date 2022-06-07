@@ -29,11 +29,11 @@ class PlayerQueryTest {
 
     @Test
     public void givenIndividualPlayerInventoryIsRequested_WhenSearchingForInventory_ThenThisIsDoneThroughTheItemRepository() {
-        final List<Item> result = playerQuery.getAllPlayerItems("1");
+        final List<Item> result = playerQuery.getAllPlayerItems(1);
 
         then(itemRepository)
                 .should()
-                .getPlayerInventoryItems("1");
+                .getPlayerInventoryItems(1);
     }
 
 }

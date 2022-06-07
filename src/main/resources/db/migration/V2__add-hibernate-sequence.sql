@@ -1,0 +1,1 @@
+create sequence graphql_test.hibernate_sequence;

@@ -43,8 +43,6 @@ class PlayerRepositoryImplTest {
 
         assertThat(result.getInventory())
                 .isEmpty();
-        assertThat(result.getId())
-                .isEqualTo("2");
     }
 
     @Test
@@ -52,7 +50,7 @@ class PlayerRepositoryImplTest {
         final Player result = playerRepository.addNewPlayer("coolguy42");
 
         assertThat(result.getId())
-                .isEqualTo("1");
+                .isEqualTo(1);
         assertThat(result.getInventory())
                 .singleElement()
                 .satisfies(item -> {
@@ -63,7 +61,7 @@ class PlayerRepositoryImplTest {
 
     @Test
     public void givenPlayerIsSearchedForById_WhenPlayerExistsWithId_ThenPlayerIsReturned() {
-        final Player result = playerRepository.findPlayerById("1");
+        final Player result = playerRepository.findPlayerById(1);
 
         assertThat(result.getUsername())
                 .isEqualTo("coolguy42");
@@ -71,14 +69,14 @@ class PlayerRepositoryImplTest {
 
     @Test
     public void givenPlayerIsSearchedForById_WhenPlayerDoesNotExistWithId_ThenExceptionIsThrown() {
-        assertThatCode(() -> playerRepository.findPlayerById("non-existent"))
+        assertThatCode(() -> playerRepository.findPlayerById(999999999))
                 .isInstanceOf(PlayerNotFoundException.class)
-                .hasMessage("Player with id non-existent not found");
+                .hasMessage("Player with id 999999999 not found");
     }
 
     private Player testPlayer() {
         final Player player = new Player();
-        player.setId("1");
+        player.setId(1);
         player.setLevel(12);
         player.setUsername("coolguy42");
         player.setInventory(Collections.singletonList(testItem()));

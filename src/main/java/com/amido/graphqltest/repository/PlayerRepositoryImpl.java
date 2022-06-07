@@ -25,7 +25,6 @@ public class PlayerRepositoryImpl implements PlayerRepository {
                 .findFirst()
                 .orElseGet(() -> {
                     final Player newPlayer = new Player();
-                    newPlayer.setId(String.valueOf(players.size() + 1));
                     newPlayer.setLevel(1);
                     newPlayer.setUsername(username);
                     players.add(newPlayer);
@@ -35,9 +34,9 @@ public class PlayerRepositoryImpl implements PlayerRepository {
     }
 
     @Override
-    public Player findPlayerById(final String id) {
+    public Player findPlayerById(final Integer id) {
         return players.stream()
-                .filter(p -> p.getId().equalsIgnoreCase(id))
+                .filter(p -> p.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new PlayerNotFoundException("Player with id " + id + " not found"));
     }

@@ -13,7 +13,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     private final PlayerRepository playerRepository;
 
     @Override
-    public List<Item> getPlayerInventoryItems(final String userId) {
+    public List<Item> getPlayerInventoryItems(final Integer userId) {
         final Player player = playerRepository.findPlayerById(userId);
         return player.getInventory();
     }

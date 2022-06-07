@@ -2,13 +2,11 @@
   "data": {
     "allPlayers": [
       {
-        "id": "1",
         "username": "whiterose",
         "level": 42,
         "inventory": []
       },
       {
-        "id": "2",
         "username": "hunter2",
         "level": 13,
         "inventory": [
@@ -25,7 +23,6 @@
         ]
       },
       {
-        "id": "3",
         "username": "coolguy42",
         "level": 50,
         "inventory": [

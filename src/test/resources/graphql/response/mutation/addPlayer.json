@@ -1,7 +1,6 @@
 {
   "data": {
     "addNewPlayer": {
-      "id": "4",
       "username": "john-doe",
       "level": 1,
       "inventory": []

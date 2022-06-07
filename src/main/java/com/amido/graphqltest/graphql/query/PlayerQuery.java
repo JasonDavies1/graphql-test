@@ -21,7 +21,7 @@ public class PlayerQuery implements GraphQLQueryResolver {
         return playerRepository.findAllPlayers();
     }
 
-    public List<Item> getAllPlayerItems(final String userId) {
+    public List<Item> getAllPlayerItems(final Integer userId) {
         return itemRepository.getPlayerInventoryItems(userId);
     }
 
