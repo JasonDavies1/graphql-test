@@ -8,16 +8,13 @@
         <version>2.6.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.amido</groupId>
     <artifactId>graphql-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>graphql-test</name>
     <description>graphql-test</description>
-    <properties>
-        <java.version>17</java.version>
-        <graphql-spring-boot-starter.version>5.0.2</graphql-spring-boot-starter.version>
-        <graphql-java-tools.version>5.2.4</graphql-java-tools.version>
-    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -26,9 +23,8 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.6.7</version>
+            <version>${spring-boot-starter-web-version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -55,23 +51,20 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>3.0.4</version>
+            <version>${maria-db-java-client-version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.graphql-java-kickstart/graphql-spring-boot-starter-test -->
         <dependency>
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphql-spring-boot-starter-test</artifactId>
-            <version>5.0.4</version>
+            <version>${graphql-spring-boot-starter-test-version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphiql-spring-boot-starter</artifactId>
             <version>${graphql-spring-boot-starter.version}</version>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -82,17 +75,34 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>8.2.0</version>
+                <version>${flyway-maven-plugin-version}</version>
                 <configuration>
-                    <user>root</user>
-                    <password>password</password>
+                    <user>${database-username}</user>
+                    <password>${database-password}</password>
                     <schemas>
-                        <schema>graphql_test</schema>
+                        <schema>${database-schema-name}</schema>
                     </schemas>
-                    <url>jdbc:mariadb://localhost:3306/graphql_test</url>
+                    <url>${database-url}/${database-table-name}</url>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <properties>
+        <java.version>17</java.version>
+        <graphql-spring-boot-starter.version>5.0.2</graphql-spring-boot-starter.version>
+        <graphql-java-tools.version>5.2.4</graphql-java-tools.version>
+        <spring-boot-starter-web-version>2.6.7</spring-boot-starter-web-version>
+        <maria-db-java-client-version>3.0.4</maria-db-java-client-version>
+        <graphql-spring-boot-starter-test-version>5.0.4</graphql-spring-boot-starter-test-version>
+
+        <!--flyway properties-->
+        <flyway-maven-plugin-version>8.2.0</flyway-maven-plugin-version>
+        <database-username>root</database-username>
+        <database-password>password</database-password>
+        <database-schema-name>graphql_test</database-schema-name>
+        <database-url>jdbc:mariadb://localhost:3306</database-url>
+        <database-table-name>graphql_test</database-table-name>
+    </properties>
 
 </project>
