@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  graphql_test:
+    container_name: graphql_test
+    env_file:
+      - app.env
+    image: graphql_test:latest
+    ports:
+      - 8080:8080
+    networks:
+      - graphql_test
+
+networks:
+  graphql_test:
+    external: true
