@@ -12,8 +12,8 @@ import java.util.List;
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String username;
     private int level;
 

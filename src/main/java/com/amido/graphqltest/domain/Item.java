@@ -10,8 +10,8 @@ import java.util.List;
 @Table(name = "items")
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String name;
     private String effect;
 
