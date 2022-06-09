@@ -16,4 +16,8 @@ public class PlayerMutation implements GraphQLMutationResolver {
         return playerService.addNewPlayer(username);
     }
 
+    public Integer removePlayer(final String username) {
+        return playerService.removePlayerByUsername(username);
+    }
+
 }

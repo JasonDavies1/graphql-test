@@ -12,4 +12,6 @@ public interface PlayerService {
 
     Player findPlayerById(Integer id);
 
+    Integer removePlayerByUsername(String username);
+
 }
