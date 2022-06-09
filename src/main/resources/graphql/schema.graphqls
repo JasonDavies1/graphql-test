@@ -20,5 +20,5 @@ type Query {
 type Mutation {
     addNewPlayer(username: String!) : Player!
     removePlayer(username: String) : Int!
-    # TODO: Implement addMarketplaceListing(userId: ID!, itemId: ID!, requestedPrice: Int) : MarketplaceListing!
+    addMarketplaceListing(userId: ID!, itemId: ID!, requestedPrice: Int) : MarketplaceListing!
 }

@@ -14,4 +14,6 @@ public interface PlayerService {
 
     Integer removePlayerByUsername(String username);
 
+    Player updatePlayer(Player player);
+
 }

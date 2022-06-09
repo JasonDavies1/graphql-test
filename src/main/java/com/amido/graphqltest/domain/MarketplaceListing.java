@@ -10,12 +10,10 @@ import java.util.UUID;
 @Entity
 @Table(name = "marketplace_listings")
 public class MarketplaceListing {
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "VARCHAR(36)")
-    private UUID id;
 
+    @Id
+    @Column(columnDefinition = "VARCHAR(36)")
+    private String id;
 
     @OneToOne
     @JoinColumn(

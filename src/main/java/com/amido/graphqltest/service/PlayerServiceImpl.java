@@ -46,4 +46,9 @@ public class PlayerServiceImpl implements PlayerService {
                 })
                 .orElseThrow(() -> new PlayerNotFoundException("Player with username " + username + " not found"));
     }
+
+    @Override
+    public Player updatePlayer(final Player player) {
+        return playerRepository.save(player);
+    }
 }

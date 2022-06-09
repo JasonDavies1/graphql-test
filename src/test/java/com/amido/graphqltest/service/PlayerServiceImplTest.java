@@ -1,6 +1,5 @@
 package com.amido.graphqltest.service;
 
-import com.amido.graphqltest.domain.Item;
 import com.amido.graphqltest.domain.Player;
 import com.amido.graphqltest.exception.PlayerNotFoundException;
 import com.amido.graphqltest.repository.PlayerRepository;
@@ -10,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static com.amido.graphqltest.util.DomainExampleHelper.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -57,7 +57,7 @@ class PlayerServiceImplTest {
     @Test
     public void givenPlayerISAdded_WhenPlayerAlreadyHasUsername_ThenExistingPlayerIsReturnedWithExistingInventory() {
         given(playerRepository.findByUsername("coolguy42"))
-                .willReturn(Optional.of(testPlayer()));
+                .willReturn(Optional.of(testPlayer(redPotion())));
 
         final Player result = playerService.addNewPlayer("coolguy42");
 
@@ -92,20 +92,6 @@ class PlayerServiceImplTest {
                 .hasMessage("Player with id 999999999 not found");
     }
 
-    private Player testPlayer() {
-        final Player player = new Player();
-        player.setId(1);
-        player.setLevel(12);
-        player.setUsername("coolguy42");
-        player.setInventory(Collections.singletonList(testItem()));
-        return player;
-    }
-
-    private Item testItem() {
-        final Item item = new Item();
-        item.setName("Red Potion");
-        return item;
-    }
 
 
 }
