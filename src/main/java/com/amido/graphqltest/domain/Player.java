@@ -25,4 +25,5 @@ public class Player {
     )
     private List<Item> inventory = new ArrayList<>();
 
+    private int currency;
 }

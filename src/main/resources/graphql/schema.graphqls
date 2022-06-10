@@ -3,6 +3,7 @@ type Player {
     username: String!
     level: Int
     inventory: [Item]!
+    currency: Int
 }
 
 type Item {
