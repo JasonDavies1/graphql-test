@@ -1,6 +1,7 @@
 package com.amido.graphqltest.util;
 
 import com.amido.graphqltest.domain.Item;
+import com.amido.graphqltest.domain.MarketplaceListing;
 import com.amido.graphqltest.domain.Player;
 
 import java.util.Arrays;
@@ -17,11 +18,26 @@ public abstract class DomainExampleHelper {
         return player;
     }
 
+    public static Player testPlayerWithCurrency(final int balance, final Item... items) {
+        final Player player = testPlayer(items);
+        player.setCurrency(balance);
+        return player;
+    }
+
     public static Item redPotion() {
         final Item item = new Item();
         item.setId(1);
         item.setName("Red Potion");
         return item;
+    }
+
+    public static MarketplaceListing testMarketplaceListingForRedPotion(final String id){
+        final MarketplaceListing marketplaceListing = new MarketplaceListing();
+        marketplaceListing.setId(id);
+        marketplaceListing.setSeller(testPlayer());
+        marketplaceListing.setItem(redPotion());
+        marketplaceListing.setRequestedPrice(200);
+        return marketplaceListing;
     }
 
 }

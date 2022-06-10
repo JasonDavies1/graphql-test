@@ -22,4 +22,5 @@ type Mutation {
     addNewPlayer(username: String!) : Player!
     removePlayer(username: String) : Int!
     addMarketplaceListing(userId: ID!, itemId: ID!, requestedPrice: Int) : MarketplaceListing!
+    buyItem(listingId: ID!, buyerId: ID! ) : MarketplaceReceipt!
 }

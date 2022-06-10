@@ -4,6 +4,7 @@ import com.amido.graphqltest.domain.Item;
 import com.amido.graphqltest.domain.MarketplaceListing;
 import com.amido.graphqltest.domain.Player;
 import com.amido.graphqltest.exception.ItemNotFoundException;
+import com.amido.graphqltest.exception.ListingNotFoundException;
 import com.amido.graphqltest.repository.MarketplaceListingRepository;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -37,6 +38,12 @@ public class MarketplaceListingServiceImpl implements MarketplaceListingService 
         seller.getInventory().remove(item);
         playerService.updatePlayer(seller);
         return marketplaceListingRepository.save(toListing(price, seller).apply(item));
+    }
+
+    @Override
+    public MarketplaceListing findMarketplaceListingById(final String id) {
+        return marketplaceListingRepository.findById(id)
+                .orElseThrow(() -> new ListingNotFoundException("Listing with ID: " + id + " not found on marketplace."));
     }
 
     @NotNull
