@@ -46,6 +46,12 @@ public class MarketplaceListingServiceImpl implements MarketplaceListingService 
                 .orElseThrow(() -> new ListingNotFoundException("Listing with ID: " + id + " not found on marketplace."));
     }
 
+    @Override
+    public void deleteMarketplaceListingById(final String id) {
+       final MarketplaceListing listingToBeDeleted = findMarketplaceListingById(id);
+       marketplaceListingRepository.delete(listingToBeDeleted);
+    }
+
     @NotNull
     private Function<Item, MarketplaceListing> toListing(
             final int price,

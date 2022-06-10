@@ -11,4 +11,6 @@ public interface MarketplaceListingService {
 
     MarketplaceListing findMarketplaceListingById(String id);
 
+    void deleteMarketplaceListingById(String id);
+
 }

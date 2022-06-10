@@ -4,11 +4,13 @@ import com.amido.graphqltest.domain.Item;
 import com.amido.graphqltest.domain.MarketplaceListing;
 import com.amido.graphqltest.domain.Player;
 import com.amido.graphqltest.exception.ItemNotFoundException;
+import com.amido.graphqltest.exception.ListingNotFoundException;
 import com.amido.graphqltest.exception.PlayerNotFoundException;
 import com.amido.graphqltest.repository.MarketplaceListingRepository;
 import com.amido.graphqltest.util.DomainExampleHelper;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -82,5 +84,31 @@ class MarketplaceListingServiceImplTest {
         then(marketplaceListingRepository)
                 .should(never())
                 .save(any());
+    }
+
+    @Test
+    public void givenMarketplaceListingDoesNotExist_WhenDeletingListing_ThenRepositoryShouldDeleteNothing() {
+        given(marketplaceListingRepository.findById("aaaaa"))
+                .willThrow(new ListingNotFoundException("Listing with ID: aaaaa not found on marketplace."));
+
+        assertThatCode(() -> marketplaceListingService.deleteMarketplaceListingById("aaaaa"))
+                .isInstanceOf(ListingNotFoundException.class);
+
+        then(marketplaceListingRepository)
+                .should(never())
+                .delete(any());
+    }
+
+    @Test
+    public void givenMarketplaceListingExists_WhenDeletingListing_ThenRepositoryShouldDeleteTheListing() {
+        final MarketplaceListing listing = new MarketplaceListing();
+        given(marketplaceListingRepository.findById("aaaaa"))
+                .willReturn(Optional.of(listing));
+
+        marketplaceListingService.deleteMarketplaceListingById("aaaaa");
+
+        then(marketplaceListingRepository)
+                .should()
+                .delete(listing);
     }
 }
