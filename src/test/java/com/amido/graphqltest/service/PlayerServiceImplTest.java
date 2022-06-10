@@ -9,7 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static com.amido.graphqltest.util.DomainExampleHelper.*;
+import static com.amido.graphqltest.util.DomainExampleHelper.redPotion;
+import static com.amido.graphqltest.util.DomainExampleHelper.testPlayer;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -91,7 +92,6 @@ class PlayerServiceImplTest {
                 .isInstanceOf(PlayerNotFoundException.class)
                 .hasMessage("Player with id 999999999 not found");
     }
-
 
 
 }

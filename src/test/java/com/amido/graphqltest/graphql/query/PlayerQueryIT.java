@@ -4,11 +4,9 @@ import com.amido.graphqltest.GraphqlTestApplication;
 import com.amido.graphqltest.configuration.GraphQlIntegrationTestBase;
 import com.graphql.spring.boot.test.GraphQLResponse;
 import org.json.JSONException;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.annotation.DirtiesContext;
 
 import java.io.IOException;
 

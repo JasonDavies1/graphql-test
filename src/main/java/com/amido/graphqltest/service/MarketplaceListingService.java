@@ -1,7 +1,6 @@
 package com.amido.graphqltest.service;
 
 import com.amido.graphqltest.domain.MarketplaceListing;
-import com.amido.graphqltest.domain.MarketplaceReceipt;
 
 public interface MarketplaceListingService {
 

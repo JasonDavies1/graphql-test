@@ -7,15 +7,14 @@ import com.amido.graphqltest.exception.ItemNotFoundException;
 import com.amido.graphqltest.exception.ListingNotFoundException;
 import com.amido.graphqltest.exception.PlayerNotFoundException;
 import com.amido.graphqltest.repository.MarketplaceListingRepository;
-import com.amido.graphqltest.util.DomainExampleHelper;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-import static com.amido.graphqltest.util.DomainExampleHelper.*;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static com.amido.graphqltest.util.DomainExampleHelper.redPotion;
+import static com.amido.graphqltest.util.DomainExampleHelper.testPlayer;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -57,7 +56,7 @@ class MarketplaceListingServiceImplTest {
     }
 
     @Test
-    public void givenPlayerDoesNotHaveItemInInventory_WhenListingItemOnMarketplace_ThenListingShouldNotBeSaved(){
+    public void givenPlayerDoesNotHaveItemInInventory_WhenListingItemOnMarketplace_ThenListingShouldNotBeSaved() {
         final Player seller = testPlayer();
 
         given(playerService.findPlayerById(1))
@@ -73,7 +72,7 @@ class MarketplaceListingServiceImplTest {
     }
 
     @Test
-    public void givenPlayerNotFoundById_WhenCreatingMarketplaceListing_ThenMarketplaceListingWillNotBeCreated(){
+    public void givenPlayerNotFoundById_WhenCreatingMarketplaceListing_ThenMarketplaceListingWillNotBeCreated() {
         given(playerService.findPlayerById(1))
                 .willThrow(new PlayerNotFoundException("Player with id 1 not found"));
 

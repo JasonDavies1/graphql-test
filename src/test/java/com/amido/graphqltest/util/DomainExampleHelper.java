@@ -31,7 +31,7 @@ public abstract class DomainExampleHelper {
         return item;
     }
 
-    public static MarketplaceListing testMarketplaceListingForRedPotion(final String id){
+    public static MarketplaceListing testMarketplaceListingForRedPotion(final String id) {
         final MarketplaceListing marketplaceListing = new MarketplaceListing();
         marketplaceListing.setId(id);
         marketplaceListing.setSeller(testPlayer());

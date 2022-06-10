@@ -48,8 +48,8 @@ public class MarketplaceListingServiceImpl implements MarketplaceListingService 
 
     @Override
     public void deleteMarketplaceListingById(final String id) {
-       final MarketplaceListing listingToBeDeleted = findMarketplaceListingById(id);
-       marketplaceListingRepository.delete(listingToBeDeleted);
+        final MarketplaceListing listingToBeDeleted = findMarketplaceListingById(id);
+        marketplaceListingRepository.delete(listingToBeDeleted);
     }
 
     @NotNull
