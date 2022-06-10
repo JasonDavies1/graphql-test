@@ -148,6 +148,28 @@ class MarketplacePurchaseServiceImplTest {
                 .isEqualTo(200);
     }
 
+    @Test
+    public void givenPurchaseIsSuccessful_WhenPurchasingItem_ThenListingShouldBeDeletedFromMarketplace() {
+        final int buyerId = 2;
+        final Player buyer = buyer(200);
+        final MarketplaceListing listing = testMarketplaceListingForRedPotion(LISTING_ID);
+        final Player seller = listing.getSeller();
+        given(marketplaceListingService.findMarketplaceListingById(LISTING_ID))
+                .willReturn(listing);
+        given(playerService.findPlayerById(buyerId))
+                .willReturn(buyer);
+        given(playerService.updatePlayer(seller))
+                .willReturn(testPlayerWithCurrency(200));
+        given(playerService.updatePlayer(buyer))
+                .willReturn(buyer(0, redPotion()));
+
+        final MarketplaceReceipt result = marketplacePurchaseService.buyItem(LISTING_ID, buyerId);
+
+        then(marketplaceListingService)
+                .should()
+                .deleteMarketplaceListingById(LISTING_ID);
+    }
+
     private Player buyer(
             final int balance,
             final Item... items) {

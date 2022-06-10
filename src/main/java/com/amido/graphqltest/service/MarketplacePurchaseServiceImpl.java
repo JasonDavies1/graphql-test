@@ -33,6 +33,7 @@ public class MarketplacePurchaseServiceImpl implements MarketplacePurchaseServic
         final Player updatedBuyer = updateBuyer(buyer, buyerBalanceAfterPurchase, listing.getItem());
         final Player seller = listing.getSeller();
         final Player updatedSeller = updateSeller(seller, listing.getRequestedPrice());
+        marketplaceListingService.deleteMarketplaceListingById(listingId);
         return createReceipt(listing, updatedBuyer, updatedSeller);
     }
 
