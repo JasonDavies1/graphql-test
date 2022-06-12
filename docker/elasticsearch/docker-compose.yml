@@ -9,6 +9,12 @@ services:
       - 9200:9200
     environment:
       - discovery.type=single-node
+    networks:
+      - graphql_test
+
+networks:
+  graphql_test:
+    external: true
 
 volumes:
   elasticsearch:
