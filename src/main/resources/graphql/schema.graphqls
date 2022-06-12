@@ -6,7 +6,19 @@ type Player {
     currency: Int
 }
 
+type PlayerDto {
+    id: ID!
+    username: String!
+    level: Int
+}
+
 type Item {
+    id: ID!
+    name: String!
+    effect: String!
+}
+
+type ItemDto {
     id: ID!
     name: String!
     effect: String!
@@ -16,6 +28,7 @@ type Query {
     allPlayers: [Player]!
     allPlayerItems(userId: ID!): [Item]!
     allMarketplaceListings: [MarketplaceListing]!
+    allMarketplaceReceipts: [MarketplaceReceipt]!
 }
 
 type Mutation {

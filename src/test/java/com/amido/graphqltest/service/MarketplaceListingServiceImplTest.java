@@ -17,6 +17,7 @@ import static com.amido.graphqltest.util.DomainExampleHelper.redPotion;
 import static com.amido.graphqltest.util.DomainExampleHelper.testPlayer;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.mock;
@@ -52,7 +53,7 @@ class MarketplaceListingServiceImplTest {
 
         then(marketplaceListingRepository)
                 .should()
-                .save(expectedListing);
+                .save(refEq(expectedListing));
     }
 
     @Test

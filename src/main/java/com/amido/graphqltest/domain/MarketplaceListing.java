@@ -1,10 +1,13 @@
 package com.amido.graphqltest.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "marketplace_listings")
 public class MarketplaceListing {

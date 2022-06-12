@@ -4,8 +4,11 @@ import com.amido.graphqltest.domain.Item;
 import com.amido.graphqltest.domain.MarketplaceListing;
 import com.amido.graphqltest.domain.MarketplaceReceipt;
 import com.amido.graphqltest.domain.Player;
+import com.amido.graphqltest.domain.dto.ItemDto;
+import com.amido.graphqltest.domain.dto.PlayerDto;
 import com.amido.graphqltest.exception.ItemAlreadyOwnedException;
 import com.amido.graphqltest.exception.NotEnoughCurrencyException;
+import com.amido.graphqltest.repository.MarketplaceReceiptRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,8 @@ public class MarketplacePurchaseServiceImpl implements MarketplacePurchaseServic
     private final PlayerService playerService;
     private final MarketplaceListingService marketplaceListingService;
 
+    private final MarketplaceReceiptRepository marketplaceReceiptRepository;
+
     @Override
     public MarketplaceReceipt buyItem(
             final String listingId,
@@ -34,12 +39,13 @@ public class MarketplacePurchaseServiceImpl implements MarketplacePurchaseServic
         final Player seller = listing.getSeller();
         final Player updatedSeller = updateSeller(seller, listing.getRequestedPrice());
         marketplaceListingService.deleteMarketplaceListingById(listingId);
-        return createReceipt(listing, updatedBuyer, updatedSeller);
+        final MarketplaceReceipt receipt = createReceipt(listing, updatedBuyer, updatedSeller);
+        return marketplaceReceiptRepository.save(receipt);
     }
 
     private void checkBuyerDoesNotOwnItem(final Player buyer, final Item item) {
         final boolean buyerOwnsItem = buyer.getInventory().stream()
-                .anyMatch(i -> i.equals(item));
+                .anyMatch(i -> i.getId() == item.getId());
         if (buyerOwnsItem) {
             throw new ItemAlreadyOwnedException("You already own this item and cannot buy another");
         }
@@ -76,10 +82,11 @@ public class MarketplacePurchaseServiceImpl implements MarketplacePurchaseServic
             final Player buyer,
             final Player seller) {
         MarketplaceReceipt marketplaceReceipt = new MarketplaceReceipt();
-        marketplaceReceipt.setId(UUID.randomUUID());
-        marketplaceReceipt.setBuyer(buyer);
-        marketplaceReceipt.setSeller(seller);
-        marketplaceReceipt.setListing(listing);
+        marketplaceReceipt.setId(UUID.randomUUID().toString());
+        marketplaceReceipt.setBuyer(PlayerDto.from(buyer));
+        marketplaceReceipt.setSeller(PlayerDto.from(seller));
+        marketplaceReceipt.setItem(ItemDto.from(listing.getItem()));
+        marketplaceReceipt.setSellPrice(listing.getRequestedPrice());
         final Instant now = Instant.now(clock);
         marketplaceReceipt.setTransactionDate(Date.from(now));
         return marketplaceReceipt;

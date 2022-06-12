@@ -10,8 +10,9 @@ type MarketplaceListing {
 # Type defining a receipt for an item purchase between two players for an agreed price
 type MarketplaceReceipt {
     id: ID!
-    seller: Player
-    buyer: Player
-    listing: MarketplaceListing
+    seller: PlayerDto
+    buyer: PlayerDto
+    item: ItemDto
+    sellPrice: Int
     transactionDate: String
 }

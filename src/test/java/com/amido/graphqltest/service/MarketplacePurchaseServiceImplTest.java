@@ -8,8 +8,10 @@ import com.amido.graphqltest.exception.ItemAlreadyOwnedException;
 import com.amido.graphqltest.exception.ListingNotFoundException;
 import com.amido.graphqltest.exception.NotEnoughCurrencyException;
 import com.amido.graphqltest.exception.PlayerNotFoundException;
+import com.amido.graphqltest.repository.MarketplaceReceiptRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.time.Clock;
 import java.time.Instant;
@@ -30,10 +32,12 @@ class MarketplacePurchaseServiceImplTest {
     private final Clock clock = mock(Clock.class);
     private final PlayerService playerService = mock(PlayerService.class);
     private final MarketplaceListingService marketplaceListingService = mock(MarketplaceListingService.class);
+    private final MarketplaceReceiptRepository marketplaceReceiptRepository = mock(MarketplaceReceiptRepository.class);
     private final MarketplacePurchaseServiceImpl marketplacePurchaseService = new MarketplacePurchaseServiceImpl(
             clock,
             playerService,
-            marketplaceListingService);
+            marketplaceListingService,
+            marketplaceReceiptRepository);
 
     @BeforeEach
     public void setUp() {
@@ -101,7 +105,7 @@ class MarketplacePurchaseServiceImplTest {
     }
 
     @Test
-    public void givenPurchaseIsSuccessful_WhenPurchasingItem_ThenBuyerShouldHaveItemAndReducedCurrencyInReceipt() {
+    public void givenPurchaseIsSuccessful_WhenPurchasingItem_ThenReceiptShouldContainSoldItem() {
         final int buyerId = 2;
         final Player buyer = buyer(200);
         final MarketplaceListing listing = testMarketplaceListingForRedPotion(LISTING_ID);
@@ -114,21 +118,23 @@ class MarketplacePurchaseServiceImplTest {
                 .willReturn(testPlayerWithCurrency(200));
         given(playerService.updatePlayer(buyer))
                 .willReturn(buyer(0, redPotion()));
+        ArgumentCaptor<MarketplaceReceipt> receiptArgumentCaptor = ArgumentCaptor.forClass(MarketplaceReceipt.class);
+        given(marketplaceReceiptRepository.save(receiptArgumentCaptor.capture()))
+                .willReturn(any());
 
-        final MarketplaceReceipt result = marketplacePurchaseService.buyItem(LISTING_ID, buyerId);
+        marketplacePurchaseService.buyItem(LISTING_ID, buyerId);
 
-        assertThat(result.getBuyer().getInventory())
-                .singleElement()
+        final MarketplaceReceipt receipt = receiptArgumentCaptor.getValue();
+
+        assertThat(receipt.getItem())
                 .satisfies(item -> {
                     assertThat(item.getName())
                             .isEqualTo("Red Potion");
                 });
-        assertThat(result.getBuyer().getCurrency())
-                .isEqualTo(0);
     }
 
     @Test
-    public void givenPurchaseIsSuccessful_WhenPurchasingItem_ThenSellerShouldHaveIncreasedCurrencyInReceipt() {
+    public void givenPurchaseIsSuccessful_WhenPurchasingItem_ThenReceiptShouldContainListedSellPrice() {
         final int buyerId = 2;
         final Player buyer = buyer(200);
         final MarketplaceListing listing = testMarketplaceListingForRedPotion(LISTING_ID);
@@ -142,9 +148,14 @@ class MarketplacePurchaseServiceImplTest {
         given(playerService.updatePlayer(buyer))
                 .willReturn(buyer(0, redPotion()));
 
-        final MarketplaceReceipt result = marketplacePurchaseService.buyItem(LISTING_ID, buyerId);
+        final ArgumentCaptor<MarketplaceReceipt> receiptArgumentCaptor = ArgumentCaptor.forClass(MarketplaceReceipt.class);
+        given(marketplaceReceiptRepository.save(receiptArgumentCaptor.capture()))
+                .willReturn(any());
 
-        assertThat(result.getSeller().getCurrency())
+        marketplacePurchaseService.buyItem(LISTING_ID, buyerId);
+
+        final MarketplaceReceipt result = receiptArgumentCaptor.getValue();
+        assertThat(result.getSellPrice())
                 .isEqualTo(200);
     }
 
