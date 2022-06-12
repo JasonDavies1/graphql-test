@@ -1,0 +1,18 @@
+# Type defining an item that is currently for sale on the marketplace.
+type MarketplaceListing {
+    id: ID!
+    seller: Player!
+    item: Item!
+    requestedPrice: Int!
+    status: String
+}
+
+# Type defining a receipt for an item purchase between two players for an agreed price
+type MarketplaceReceipt {
+    id: ID!
+    seller: PlayerDto
+    buyer: PlayerDto
+    item: ItemDto
+    sellPrice: Int
+    transactionDate: String
+}

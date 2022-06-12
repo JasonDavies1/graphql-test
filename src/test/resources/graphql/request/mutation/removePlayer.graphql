@@ -1,0 +1,3 @@
+mutation {
+    removePlayer(username: "john-doe")
+}

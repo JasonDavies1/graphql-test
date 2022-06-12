@@ -3,6 +3,13 @@ type Player {
     username: String!
     level: Int
     inventory: [Item]!
+    currency: Int
+}
+
+type PlayerDto {
+    id: ID!
+    username: String!
+    level: Int
 }
 
 type Item {
@@ -11,11 +18,22 @@ type Item {
     effect: String!
 }
 
+type ItemDto {
+    id: ID!
+    name: String!
+    effect: String!
+}
+
 type Query {
     allPlayers: [Player]!
     allPlayerItems(userId: ID!): [Item]!
+    allMarketplaceListings: [MarketplaceListing]!
+    allMarketplaceReceipts: [MarketplaceReceipt]!
 }
 
 type Mutation {
     addNewPlayer(username: String!) : Player!
+    removePlayer(username: String) : Int!
+    addMarketplaceListing(userId: ID!, itemId: ID!, requestedPrice: Int) : MarketplaceListing!
+    buyItem(listingId: ID!, buyerId: ID! ) : MarketplaceReceipt!
 }

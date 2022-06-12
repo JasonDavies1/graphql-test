@@ -17,6 +17,9 @@ services:
     networks:
     - graphql_test
 
+volumes:
+  mariadb:
+
 networks:
   graphql_test:
     external: true

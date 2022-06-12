@@ -8,3 +8,8 @@ spring:
     hibernate:
       ddl-auto: ${DDL_AUTO_TYPE:validate}
 
+app:
+  elasticsearch:
+    host: ${ELASTIC_SEARCH_HOST:localhost}
+    port: ${ELASTIC_SEARCH_PORT:9200}
+

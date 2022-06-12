@@ -36,7 +36,7 @@ VALUES ('whiterose', 42),
 insert into items (name, effect)
 VALUES ('Red Potion of Healing', 'Restore 50HP'),
        ('Blue Potion of Mana', 'Restore 20MP'),
-       ('Green Potion of Magic', 'Restore 50HGP');
+       ('Green Potion of Magic', 'Restore 50MGP');
 
 insert into player_items (player_id, item_id)
 values (2, 1),

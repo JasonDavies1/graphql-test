@@ -35,4 +35,20 @@ public class PlayerServiceImpl implements PlayerService {
         return playerRepository.findById(id)
                 .orElseThrow(() -> new PlayerNotFoundException("Player with id " + id + " not found"));
     }
+
+    @Override
+    public Integer removePlayerByUsername(String username) {
+        return playerRepository.findByUsername(username)
+                .map(p -> {
+                    int id = p.getId();
+                    playerRepository.delete(p);
+                    return id;
+                })
+                .orElseThrow(() -> new PlayerNotFoundException("Player with username " + username + " not found"));
+    }
+
+    @Override
+    public Player updatePlayer(final Player player) {
+        return playerRepository.save(player);
+    }
 }

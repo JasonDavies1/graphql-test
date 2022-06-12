@@ -4,7 +4,9 @@ import com.amido.graphqltest.GraphqlTestApplication;
 import com.amido.graphqltest.configuration.GraphQlIntegrationTestBase;
 import com.graphql.spring.boot.test.GraphQLResponse;
 import org.json.JSONException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
@@ -17,7 +19,13 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = GraphqlTestApplication.class
 )
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class PlayerMutationIT extends GraphQlIntegrationTestBase {
+
+    @AfterAll
+    void cleanUp() throws IOException {
+        graphQLTestTemplate.postForResource(String.format(GRAPHQL_REQUEST_RESOURCE, MUTATION, "removePlayer"));
+    }
 
     @Test
     public void givenAPlayerShouldBeAdded_WhenAddingPlayer_ThenJsonContainingTheCreatedPlayerIsReturned() throws IOException, JSONException {

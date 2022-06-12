@@ -4,7 +4,6 @@ import com.amido.graphqltest.GraphqlTestApplication;
 import com.amido.graphqltest.configuration.GraphQlIntegrationTestBase;
 import com.graphql.spring.boot.test.GraphQLResponse;
 import org.json.JSONException;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,6 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 class PlayerQueryIT extends GraphQlIntegrationTestBase {
 
     @Test
-    @Disabled("Shared context between PlayerMutationIT and this test causes this test to fail unless run in isolation")
     public void givenAllPlayersAreRequested_WhenGraphQlQueryIsMade_ThenJsonContainingThreePlayersIsReturned() throws IOException, JSONException {
         final GraphQLResponse result = graphQLTestTemplate.postForResource(String.format(GRAPHQL_REQUEST_RESOURCE, QUERY, "allPlayers"));
 
