@@ -5,6 +5,8 @@ services:
     image: elasticsearch:7.8.0
     hostname: elasticsearch
     container_name: elasticsearch
+    env_file:
+      - app.env
     ports:
       - 9200:9200
     environment:

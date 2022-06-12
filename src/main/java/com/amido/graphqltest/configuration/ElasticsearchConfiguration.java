@@ -1,5 +1,7 @@
 package com.amido.graphqltest.configuration;
 
+import com.amido.graphqltest.properties.ElasticsearchProperties;
+import lombok.RequiredArgsConstructor;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,13 +13,16 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 
 @Configuration
 @EnableElasticsearchRepositories(basePackages = "com.amido.graphqltest.repository")
+@RequiredArgsConstructor
 public class ElasticsearchConfiguration {
+
+    private final ElasticsearchProperties elasticsearchProperties;
 
     @Bean
     public RestHighLevelClient client() {
-        ClientConfiguration clientConfiguration
+        final ClientConfiguration clientConfiguration
                 = ClientConfiguration.builder()
-                .connectedTo("localhost:9200")
+                .connectedTo(String.join(":", elasticsearchProperties.getHost()), elasticsearchProperties.getPort())
                 .build();
 
         return RestClients.create(clientConfiguration).rest();
