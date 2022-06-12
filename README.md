@@ -2,8 +2,14 @@
 
 ## Overview
 
-This application is my first experience with using both GraphQL and MariaDB. The application comprises a simple domain
-model of `Player` entities and `Item` entities. These entities are stored in MariaDB and then retrievable using GraphQL.
+This application has been developed as an introduction to both GraphQL and document storage using Elasticsearch.
+
+## Technology Stack
+
+- JDK 17
+- MariaDB for database persistence
+- Flyway for database migration management
+- Elasticsearch for archival marketplace transaction receipt storage
 
 ## Prerequisites
 
@@ -33,10 +39,18 @@ application.
    items
    into the MariaDB database
 
+### Running Elasticsearch
+
+1) Lastly as a pre-requisite, use `docker-compose up -d` in the `docker/elasticsearch` directory to launch an instance
+   of Elasticsearch running on port 9200. 
+
 ### Building the graphql-test application
 
-1) Again, at the project root, use the command `docker build -t graphql_test .` in order to build this application as
-   a Docker image
+**Note:**  Integration tests will currently only work with seed data inserted using Flyway migrations. It is intended
+in the future that the use of Testcontainers will remedy this. 
+
+1) Again, at the project root, use the command `mvn clean install && cd target && docker build -t graphql_test .` in 
+   order to build this application as a Docker image
 2) Once the image has been built successfully you may now use the `docker-compose.yml` within `docker/graphql_test` to
    launch the application, again with `docker-compose up -d`, on port 8080.
 
@@ -46,15 +60,11 @@ The application contains GraphiQL as a dependency which may be used to quickly t
 additional installation of tools. By default, this is accessible at **http://localhost:8080/graphiql**
 
 From this interface you are able to see the available `Query` and `Mutation` types, along with the configurable response
-entities. There are 3 available interactions:
-
-- List all current players (allPlayers)
-- List all items for a particular (allPlayerItems)
-- Add a new player (addPlayer)
+entities. There are 8 available interactions viewable in `resources/graphql/schema.graphqls`
 
 Using the left-hand pane of GraphiDQL you can enter your queries.
 
-## Example
+## Example - Retrieving all players 
 
 The following query:
 
@@ -73,7 +83,7 @@ query {
 }
 ```
 
-when run with the included seed data will return the following JSON output:
+when run with the included seed data will return all the list of players inserted using Flyway:
 
 ```json
 {
